@@ -1,4 +1,4 @@
-let prefix = "R!"  
+let prefix = "R!" ;
 
  exports.run = async(client, message) => {
   if (message.author.bot) return;
