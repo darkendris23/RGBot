@@ -9,6 +9,8 @@ const Enmap = require("enmap");
 const fs = require("fs");
 require(__dirname + "/app/keepAlive.js");
 
+
+
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.events = new Discord.Collection();
