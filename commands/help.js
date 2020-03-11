@@ -1,5 +1,4 @@
-exports.run = async (client, message, args) => {
-  if (!args.length) {
-    return message.channel.send("hi");
-  }
+module.exports.run = (client, message, args) => {
+  if (!args.length) return message.channel.send("Hi");
+  
 };
