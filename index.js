@@ -2,15 +2,30 @@ require("dotenv").config();
 const Discord = require("discord.js");
 
 const client = new Discord.Client();
-const guild = new Discord.Guild();
+const queue = new Map();
 const config = require("./config.json");
 client.config = config;
 
 const Enmap = require("enmap");
 const fs = require("fs");
+const ytdl = require('ytdl-core');
 require(__dirname + "/app/keepAlive.js");
 
+client.settings = new Enmap({
+  name: "settings",
+  fetchAll: false,
+  autoFetch: true,
+  cloneLevel: 'deep'
+});
 
+const defaultSettings = {	
+  prefix: "!",	
+  modLogChannel: "mod-log",	
+  modRole: "Moderator",	
+  adminRole: "Administrator",	
+  welcomeChannel: "welcome",	
+  welcomeMessage: "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D"	
+}
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -39,10 +54,6 @@ fs.readdir("./commands/", (err, files) => {
     console.log(`Attempting to load command ${commandName}`);
     client.commands.set(commandName, props);
   });
-});
-
-client.on("Serving guild", () => {
-  console.log(`${guild.id}`);
 });
 
 client.login(process.env.TOKEN);
