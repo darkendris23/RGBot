@@ -2,6 +2,7 @@ require("dotenv").config();
 const Discord = require("discord.js");
 
 const client = new Discord.Client();
+const guild = new Discord.Guild();
 const config = require("./config.json");
 client.config = config;
 
@@ -40,5 +41,8 @@ fs.readdir("./commands/", (err, files) => {
   });
 });
 
+client.on("Serving guild", () => {
+  console.log(`${guild.id}`);
+});
 
 client.login(process.env.TOKEN);
