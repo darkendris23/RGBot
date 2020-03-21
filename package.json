@@ -22,6 +22,10 @@
     "moment-duration-format": "^2.2.2",
     "express": "^4.17.1",
     "dotenv": "^8.2.0",
-    "ytdl-core": "^2.0.0"
-  }
+    "ytdl-core": "^2.0.0",
+    "opus-encode": "^2.0.2",
+    "ffmpeg-static": "^4.0.1",
+    "better-sqlite3": "^6.0.1"
+  },
+  "license": "MIT"
 }
