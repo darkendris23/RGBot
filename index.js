@@ -2,7 +2,6 @@ require("dotenv").config();
 const Discord = require("discord.js");
 
 const client = new Discord.Client();
-const queue = new Map();
 const config = require("./config.json");
 client.config = config;
 
@@ -10,6 +9,10 @@ const Enmap = require("enmap");
 const fs = require("fs");
 const ytdl = require('ytdl-core');
 require(__dirname + "/app/keepAlive.js");
+
+client.dataBase = new Enmap();
+client.gConf = new Enmap();
+client.radio = new Enmap();
 
 client.settings = new Enmap({
   name: "settings",
@@ -19,10 +22,10 @@ client.settings = new Enmap({
 });
 
 const defaultSettings = {	
-  prefix: "!",	
+  prefix: "R!",	
   modLogChannel: "mod-log",	
   modRole: "Moderator",	
-  adminRole: "Administrator",	
+  adminRole: "Admin",	
   welcomeChannel: "welcome",	
   welcomeMessage: "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D"	
 }
