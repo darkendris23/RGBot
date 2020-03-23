@@ -5,14 +5,23 @@ const client = new Discord.Client();
 const config = require("./config.json");
 client.config = config;
 
+const mongo = require('mongodb').MongoClient
 const Enmap = require("enmap");
 const fs = require("fs");
 const ytdl = require('ytdl-core');
 require(__dirname + "/app/keepAlive.js");
 
-client.dataBase = new Enmap();
-client.gConf = new Enmap();
+//=============================================================
+
+const url = process.env.DB;
+
+//=============================================================
+
+client.user = new Enmap({name: "user"});
+client.guildConfig = new Enmap();
 client.radio = new Enmap();
+
+//=============================================================
 
 client.settings = new Enmap({
   name: "settings",
@@ -29,6 +38,12 @@ const defaultSettings = {
   welcomeChannel: "welcome",	
   welcomeMessage: "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D"	
 }
+
+//=====================================================================
+
+
+
+//=====================================================================
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
