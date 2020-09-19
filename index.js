@@ -5,7 +5,7 @@ const client = new Discord.Client();
 const config = require("./config.json");
 client.config = config;
 
-const mongo = require('mongodb').MongoClient
+const MongoClient = require('mongodb').MongoClient
 const Enmap = require("enmap");
 const fs = require("fs");
 const ytdl = require('ytdl-core');
@@ -41,7 +41,29 @@ const defaultSettings = {
 
 //=====================================================================
 
+const mongo = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+mongo.connect(err => {
+  if (err) return console.error(err);
 
+mongo.open(function(err, mongo) {
+  
+const servers = mongo.db("servers")
+const gSettings = servers.collection("settings");
+
+gSettings.insertOne({name: 'Test'}, (err, result) => {
+  if (err) {
+	console.error(err)
+    return
+  } else {
+    console.log(result)
+  }
+
+gSettings.find().toArray((err, items) => {
+  console.log(items)
+})
+	})
+})
+});
 
 //=====================================================================
 
