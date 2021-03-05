@@ -10,6 +10,7 @@ const Enmap = require("enmap");
 const fs = require("fs");
 const ytdl = require('ytdl-core');
 require(__dirname + "/app/keepAlive.js");
+const activity = "with Anime Lyrics PH";
 
 //=============================================================
 
@@ -31,7 +32,7 @@ client.settings = new Enmap({
 });
 
 const defaultSettings = {	
-  prefix: "R!",	
+  prefix: "r!",	
   modLogChannel: "mod-log",	
   modRole: "Moderator",	
   adminRole: "Admin",	
@@ -94,6 +95,30 @@ fs.readdir("./commands/", (err, files) => {
     console.log(`Attempting to load command ${commandName}`);
     client.commands.set(commandName, props);
   });
+});
+
+//Radio
+client.on("ready", () => {
+  client.activity = activity
+  const chtemp = client.channels.find(channel => channel.name === "Radio") 
+  let chids = fs.existsSync('./commands/radio/chid.txt') ? fs.readFileSync('./commands/radio/chid.txt').toString() : chtemp ;
+  chids.join()
+    .then(connection => {
+
+    // Yay, it worked!
+
+    console.log("Successfully connected.");
+    return connection.play(ytdl('https://youtu.be/zp4h8k3tINs', {filter : 'audioonly'}));
+
+  }) 
+    .catch(e => {
+
+    // Oh no, it errored! Let's log it to console :)
+
+    console.error(e);
+
+  });
+
 });
 
 client.login(process.env.TOKEN);
